@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sravana Lakshmi Thota — Machine Learning Engineer</title>
+<meta name="description" content="Machine learning engineer with roots in production data engineering. Building ML systems end to end, from the data pipeline to the deployed model." />
+
+<!-- Fonts load in the browser when the page is viewed -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --paper: #ECEEE8;
+    --paper-2: #E4E7DF;
+    --ink: #17201B;
+    --slate: #57615A;
+    --line: #D0D4CB;
+    --accent: #1E5A4C;   /* deep pine */
+    --gold: #B07D14;     /* muted ochre, used sparingly */
+
+    --display: "Space Grotesk", system-ui, sans-serif;
+    --serif: "Newsreader", Georgia, serif;
+    --mono: "Space Mono", ui-monospace, monospace;
+
+    --wrap: 1080px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+
+  .wrap {
+    width: 100%;
+    max-width: var(--wrap);
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  .mono {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--slate);
+  }
+
+  /* ---------- NAV ---------- */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  .nav-name {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 26px; }
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--slate);
+    transition: color 0.2s ease;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  @media (max-width: 640px) {
+    .nav-links a:not(.nav-cta) { display: none; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero { padding: 96px 0 72px; border-bottom: 1px solid var(--line); }
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+  }
+  .hero-eyebrow .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent);
+    display: inline-block;
+    flex: none;
+  }
+  .hero h1 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(38px, 7vw, 76px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 0 0 28px;
+    max-width: 15ch;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: clamp(19px, 2.4vw, 23px);
+    color: var(--slate);
+    max-width: 54ch;
+    margin: 0 0 40px;
+  }
+  .tracks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 8px;
+    margin-bottom: 44px;
+  }
+  .track {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    padding: 7px 13px;
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    background: var(--paper-2);
+  }
+  .track.primary {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 12px 20px;
+    border: 1px solid var(--ink);
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .btn:hover { background: var(--ink); color: var(--paper); }
+  .btn.ghost { border-color: var(--line); }
+  .btn.ghost:hover { background: var(--ink); border-color: var(--ink); }
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section { padding: 80px 0; }
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .sec-head .idx {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+  }
+  .sec-head h2 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(26px, 4vw, 38px);
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 48px;
+  }
+  .about-lede {
+    font-size: clamp(20px, 2.6vw, 26px);
+    line-height: 1.45;
+  }
+  .about-lede strong { color: var(--accent); font-weight: 500; }
+  .about-side p { margin: 0 0 18px; color: var(--slate); font-size: 17px; }
+  .fact {
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+    margin-top: 18px;
+  }
+  .fact .k { font-family: var(--mono); font-size: 11px; color: var(--gold); letter-spacing: 0.06em; text-transform: uppercase; }
+  .fact .v { display: block; margin-top: 4px; font-family: var(--display); font-size: 17px; color: var(--ink); }
+  @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+  /* ---------- WORK ---------- */
+  .work { background: var(--paper-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .proj {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 28px;
+    padding: 34px 0;
+    border-top: 1px solid var(--line);
+    align-items: start;
+    text-decoration: none;
+    transition: padding-left 0.25s ease;
+  }
+  .proj:first-of-type { border-top: none; }
+  .proj:hover { padding-left: 10px; }
+  .proj-id {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--gold);
+    padding-top: 5px;
+  }
+  .proj-body h3 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(21px, 3vw, 27px);
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+  }
+  .proj-body .task {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: inline-block;
+  }
+  .proj-body p { margin: 0 0 14px; color: var(--slate); font-size: 17px; max-width: 60ch; }
+  .stack { display: flex; flex-wrap: wrap; gap: 6px; }
+  .stack span {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 3px 9px;
+    border-radius: 3px;
+  }
+  .proj-arrow {
+    font-family: var(--display);
+    font-size: 24px;
+    color: var(--slate);
+    padding-top: 4px;
+    transition: transform 0.25s ease, color 0.25s ease;
+  }
+  .proj:hover .proj-arrow { transform: translate(4px, -4px); color: var(--accent); }
+  @media (max-width: 680px) {
+    .proj { grid-template-columns: 40px 1fr; gap: 16px; }
+    .proj-arrow { display: none; }
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+  }
+  .skill-col h4 {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .skill-col ul { list-style: none; margin: 0; padding: 0; }
+  .skill-col li {
+    font-family: var(--display);
+    font-size: 16px;
+    padding: 7px 0;
+    color: var(--ink);
+  }
+  @media (max-width: 700px) { .skills-grid { grid-template-columns: 1fr; gap: 28px; } }
+
+  /* ---------- CONTACT ---------- */
+  .contact { text-align: center; }
+  .contact h2 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(30px, 6vw, 56px);
+    letter-spacing: -0.02em;
+    margin: 0 0 12px;
+  }
+  .contact p { color: var(--slate); max-width: 46ch; margin: 0 auto 36px; }
+  .contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 28px 0;
+  }
+  .foot-inner {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* ---------- REVEAL ---------- */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  a.btn:focus-visible, .nav-links a:focus-visible, .proj:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .proj, .proj-arrow { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="nav-name">SRAVANA&nbsp;THOTA</a>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact" class="nav-cta">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-eyebrow">
+      <span class="dot"></span>
+      <span class="mono">Machine Learning Engineer &nbsp;·&nbsp; Boston, MA</span>
+    </div>
+    <h1>I build ML systems <em>end to end</em> — from the data pipeline to the deployed model.</h1>
+    <p class="hero-sub">A machine learning engineer with roots in production data engineering. I like the parts of the job that live outside the notebook: the pipeline, the evaluation, the thing that has to actually run.</p>
+    <div class="tracks">
+      <span class="track primary">Applied ML</span>
+      <span class="track primary">AI Systems</span>
+      <span class="track">Data Engineering</span>
+    </div>
+    <div class="cta-row">
+      <a class="btn" href="https://github.com/sravanithota311" target="_blank" rel="noopener">GitHub ↗</a>
+      <!-- TODO: replace with your LinkedIn URL -->
+      <a class="btn ghost" href="https://www.linkedin.com/in/YOUR-HANDLE" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <!-- TODO: drop your resume PDF next to this file and it will download -->
+      <a class="btn ghost" href="resume.pdf" target="_blank" rel="noopener">Résumé ↗</a>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="idx">01</span>
+      <h2>About</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-lede reveal">
+        I spent about <strong>two and a half years</strong> building Azure and Databricks data pipelines at KPMG before completing a <strong>Master's in Analytics (Applied Machine Intelligence)</strong> at Northeastern. That order matters: I came to ML already knowing what breaks in production, so I build models that hold up on real, messy data — not just clean benchmarks.
+      </div>
+      <div class="about-side reveal">
+        <p>My work spans the full stack, from distributed data processing to computer vision to multi-agent tooling. I care about evaluation and failure analysis as much as the model itself.</p>
+        <div class="fact">
+          <span class="k">Education</span>
+          <span class="v">M.P.S. Analytics — Northeastern, 2026</span>
+        </div>
+        <div class="fact">
+          <span class="k">Foundation</span>
+          <span class="v">Data Engineering @ KPMG</span>
+        </div>
+        <div class="fact">
+          <span class="k">Certification</span>
+          <span class="v">Microsoft Azure AZ-900</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work" class="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="idx">02</span>
+      <h2>Selected work</h2>
+    </div>
+
+    <!-- TODO: confirm each href matches your actual repo name under github.com/sravanithota311 -->
+
+    <a class="proj reveal" href="https://github.com/sravanithota311/skin-scan" target="_blank" rel="noopener">
+      <span class="proj-id">PRJ&nbsp;01</span>
+      <div class="proj-body">
+        <span class="task">Computer Vision · Object Detection</span>
+        <h3>Skin-Scan</h3>
+        <p>A skin-condition detection app built on YOLOv8 — training, inference, and a usable interface end to end.</p>
+        <div class="stack"><span>Python</span><span>YOLOv8</span><span>PyTorch</span><span>OpenCV</span></div>
+      </div>
+      <span class="proj-arrow">↗</span>
+    </a>
+
+    <a class="proj reveal" href="https://github.com/sravanithota311/chicago-taxi-fare-prediction" target="_blank" rel="noopener">
+      <span class="proj-id">PRJ&nbsp;02</span>
+      <div class="proj-body">
+        <span class="task">Distributed ML · Regression</span>
+        <h3>Chicago Taxi Fare Prediction</h3>
+        <p>Fare prediction at scale using PySpark on Databricks — feature engineering and modeling over a large trips dataset.</p>
+        <div class="stack"><span>PySpark</span><span>Databricks</span><span>MLlib</span><span>SQL</span></div>
+      </div>
+      <span class="proj-arrow">↗</span>
+    </a>
+
+    <a class="proj reveal" href="https://github.com/sravanithota311/boston-crime-analysis" target="_blank" rel="noopener">
+      <span class="proj-id">PRJ&nbsp;03</span>
+      <div class="proj-body">
+        <span class="task">Classification · Data Integrity</span>
+        <h3>Boston Crime Severity Classification</h3>
+        <p>A severity classifier rebuilt to eliminate target leakage after I caught the label leaking into the feature set — a reminder that clean evaluation beats a flattering score.</p>
+        <div class="stack"><span>Python</span><span>scikit-learn</span><span>pandas</span></div>
+      </div>
+      <span class="proj-arrow">↗</span>
+    </a>
+
+    <a class="proj reveal" href="https://github.com/sravanithota311/multi-agent-ai-system" target="_blank" rel="noopener">
+      <span class="proj-id">PRJ&nbsp;04</span>
+      <div class="proj-body">
+        <span class="task">AI Systems · Agents</span>
+        <h3>Multi-Agent AI System</h3>
+        <p>A coordinated multi-agent system built on the Anthropic Claude SDK, served through a typed FastAPI backend.</p>
+        <div class="stack"><span>Claude SDK</span><span>FastAPI</span><span>Pydantic</span><span>Python</span></div>
+      </div>
+      <span class="proj-arrow">↗</span>
+    </a>
+
+    <a class="proj reveal" href="https://github.com/sravanithota311/ocsr-benchmark" target="_blank" rel="noopener">
+      <span class="proj-id">PRJ&nbsp;05</span>
+      <div class="proj-body">
+        <span class="task">Capstone · Model Evaluation</span>
+        <h3>OCSR Benchmark</h3>
+        <p>An optical chemical-structure recognition benchmark using DECIMER and RDKit — with precision/recall evaluation and categorized failure-mode analysis.</p>
+        <div class="stack"><span>DECIMER</span><span>RDKit</span><span>PyTorch</span><span>Python</span></div>
+      </div>
+      <span class="proj-arrow">↗</span>
+    </a>
+
+    <a class="proj reveal" href="https://github.com/sravanithota311/clinical-decision-support" target="_blank" rel="noopener">
+      <span class="proj-id">PRJ&nbsp;06</span>
+      <div class="proj-body">
+        <span class="task">System Design · Healthcare</span>
+        <h3>Clinical Decision Support System</h3>
+        <p>A design project for a clinical decision support system — architecture, data flow, and the safety considerations a real deployment would demand.</p>
+        <div class="stack"><span>System Design</span><span>ML Architecture</span></div>
+      </div>
+      <span class="proj-arrow">↗</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="idx">03</span>
+      <h2>Toolkit</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-col reveal">
+        <h4>Machine Learning</h4>
+        <ul>
+          <li>PyTorch</li>
+          <li>YOLOv8 / Computer Vision</li>
+          <li>RAG &amp; Vector Databases</li>
+          <li>LangChain</li>
+          <li>Model Evaluation &amp; Failure Analysis</li>
+        </ul>
+      </div>
+      <div class="skill-col reveal">
+        <h4>Data Engineering</h4>
+        <ul>
+          <li>PySpark</li>
+          <li>Databricks</li>
+          <li>Azure Data Factory</li>
+          <li>SQL &amp; Query Optimization</li>
+          <li>SSIS</li>
+        </ul>
+      </div>
+      <div class="skill-col reveal">
+        <h4>Cloud &amp; Tools</h4>
+        <ul>
+          <li>Azure (AZ-900)</li>
+          <li>FastAPI &amp; Pydantic</li>
+          <li>Anthropic Claude API</li>
+          <li>Power BI / Tableau</li>
+          <li>Git &amp; GitHub</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <p class="mono reveal" style="margin-bottom:20px;">04 — Get in touch</p>
+    <h2 class="reveal">Let's build something.</h2>
+    <p class="reveal">Open to AI/ML Engineer roles. Happy to talk through any of the work above.</p>
+    <div class="contact-links reveal">
+      <!-- TODO: replace with your email -->
+      <a class="btn" href="mailto:you@example.com">Email ↗</a>
+      <a class="btn ghost" href="https://github.com/sravanithota311" target="_blank" rel="noopener">GitHub ↗</a>
+      <!-- TODO: replace with your LinkedIn URL -->
+      <a class="btn ghost" href="https://www.linkedin.com/in/YOUR-HANDLE" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-inner">
+    <span class="mono">© 2026 Sravana Thota</span>
+    <span class="mono">Built &amp; hosted on GitHub Pages</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal — respects reduced-motion via CSS
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+</script>
+
+</body>
+</html>

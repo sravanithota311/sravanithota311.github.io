@@ -243,6 +243,16 @@
     display: inline-block;
   }
   .proj-body p { margin: 0 0 14px; color: var(--slate); font-size: 17px; max-width: 60ch; }
+  .proj-links { display: flex; gap: 20px; margin-top: 14px; }
+  .proj-links a {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+  .proj-links a:hover { border-bottom-color: var(--accent); }
   .stack { display: flex; flex-wrap: wrap; gap: 6px; }
   .stack span {
     font-family: var(--mono);
@@ -261,6 +271,16 @@
     transition: transform 0.25s ease, color 0.25s ease;
   }
   .proj:hover .proj-arrow { transform: translate(4px, -4px); color: var(--accent); }
+  .proj.no-link { cursor: default; }
+  .proj.no-link:hover { padding-left: 0; }
+  .proj-note {
+    padding-top: 6px;
+    color: var(--slate);
+    white-space: nowrap;
+  }
+  @media (max-width: 680px) {
+    .proj-note { display: none; }
+  }
   @media (max-width: 680px) {
     .proj { grid-template-columns: 40px 1fr; gap: 16px; }
     .proj-arrow { display: none; }
@@ -290,6 +310,33 @@
     color: var(--ink);
   }
   @media (max-width: 700px) { .skills-grid { grid-template-columns: 1fr; gap: 28px; } }
+
+  /* ---------- CERTIFICATIONS ---------- */
+  .cert-list { display: flex; flex-direction: column; }
+  .cert {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px 0;
+    border-top: 1px solid var(--line);
+  }
+  .cert:first-child { border-top: none; }
+  .cert-main { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  .cert-main h3 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(18px, 2.6vw, 22px);
+    margin: 0;
+  }
+  .cert-issuer { color: var(--slate); font-size: 16px; }
+  .cert-date { flex: none; color: var(--gold); }
+  .cert-foot {
+    margin-top: 24px;
+    font-size: 15px;
+    color: var(--slate);
+  }
+  .cert-foot a { color: var(--accent); }
 
   /* ---------- CONTACT ---------- */
   .contact { text-align: center; }
@@ -341,6 +388,7 @@
       <a href="#work">Work</a>
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
+      <a href="#certs">Certs</a>
       <a href="#contact" class="nav-cta">Contact</a>
     </div>
   </div>
@@ -409,41 +457,8 @@
 
     <!-- TODO: confirm each href matches your actual repo name under github.com/sravanithota311 -->
 
-    <a class="proj reveal" href="https://github.com/sravanithota311/skin-scan" target="_blank" rel="noopener">
+    <a class="proj reveal" href="https://github.com/sravanithota311/multi-agent-ai" target="_blank" rel="noopener">
       <span class="proj-id">PRJ&nbsp;01</span>
-      <div class="proj-body">
-        <span class="task">Computer Vision · Object Detection</span>
-        <h3>Skin-Scan</h3>
-        <p>A skin-condition detection app built on YOLOv8 — training, inference, and a usable interface end to end.</p>
-        <div class="stack"><span>Python</span><span>YOLOv8</span><span>PyTorch</span><span>OpenCV</span></div>
-      </div>
-      <span class="proj-arrow">↗</span>
-    </a>
-
-    <a class="proj reveal" href="https://github.com/sravanithota311/chicago-taxi-fare-prediction" target="_blank" rel="noopener">
-      <span class="proj-id">PRJ&nbsp;02</span>
-      <div class="proj-body">
-        <span class="task">Distributed ML · Regression</span>
-        <h3>Chicago Taxi Fare Prediction</h3>
-        <p>Fare prediction at scale using PySpark on Databricks — feature engineering and modeling over a large trips dataset.</p>
-        <div class="stack"><span>PySpark</span><span>Databricks</span><span>MLlib</span><span>SQL</span></div>
-      </div>
-      <span class="proj-arrow">↗</span>
-    </a>
-
-    <a class="proj reveal" href="https://github.com/sravanithota311/boston-crime-analysis" target="_blank" rel="noopener">
-      <span class="proj-id">PRJ&nbsp;03</span>
-      <div class="proj-body">
-        <span class="task">Classification · Data Integrity</span>
-        <h3>Boston Crime Severity Classification</h3>
-        <p>A severity classifier rebuilt to eliminate target leakage after I caught the label leaking into the feature set — a reminder that clean evaluation beats a flattering score.</p>
-        <div class="stack"><span>Python</span><span>scikit-learn</span><span>pandas</span></div>
-      </div>
-      <span class="proj-arrow">↗</span>
-    </a>
-
-    <a class="proj reveal" href="https://github.com/sravanithota311/multi-agent-ai-system" target="_blank" rel="noopener">
-      <span class="proj-id">PRJ&nbsp;04</span>
       <div class="proj-body">
         <span class="task">AI Systems · Agents</span>
         <h3>Multi-Agent AI System</h3>
@@ -453,24 +468,70 @@
       <span class="proj-arrow">↗</span>
     </a>
 
-    <a class="proj reveal" href="https://github.com/sravanithota311/ocsr-benchmark" target="_blank" rel="noopener">
-      <span class="proj-id">PRJ&nbsp;05</span>
+    <div class="proj reveal no-link">
+      <span class="proj-id">PRJ&nbsp;02</span>
+      <div class="proj-body">
+        <span class="task">LLM Distillation · MLOps</span>
+        <h3>Self-Distilling Classifier</h3>
+        <p>A self-retraining pipeline that uses Gemini as a labeling teacher to train a lightweight local classifier on a live arXiv stream — with champion/challenger gating, drift monitoring, and a live dashboard, all automated on GitHub Actions.</p>
+        <div class="stack"><span>Python</span><span>scikit-learn</span><span>Gemini API</span><span>GitHub Actions</span></div>
+        <div class="proj-links">
+          <a href="https://github.com/sravanithota311/self-distilling-classifier" target="_blank" rel="noopener">GitHub&nbsp;↗</a>
+          <a href="https://sravanithota311.github.io/self-distilling-classifier/" target="_blank" rel="noopener">Live dashboard&nbsp;↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="proj reveal no-link">
+      <span class="proj-id">PRJ&nbsp;03</span>
       <div class="proj-body">
         <span class="task">Capstone · Model Evaluation</span>
         <h3>OCSR Benchmark</h3>
         <p>An optical chemical-structure recognition benchmark using DECIMER and RDKit — with precision/recall evaluation and categorized failure-mode analysis.</p>
         <div class="stack"><span>DECIMER</span><span>RDKit</span><span>PyTorch</span><span>Python</span></div>
       </div>
+    </div>
+
+    <a class="proj reveal" href="https://github.com/sravanithota311/boston-crime-analysis" target="_blank" rel="noopener">
+      <span class="proj-id">PRJ&nbsp;04</span>
+      <div class="proj-body">
+        <span class="task">Classification · Data Integrity</span>
+        <h3>Boston Crime Severity Classification</h3>
+        <p>A severity classifier rebuilt to eliminate target leakage after I caught the label leaking into the feature set — a reminder that clean evaluation beats a flattering score.</p>
+        <div class="stack"><span>Python</span><span>scikit-learn</span><span>pandas</span></div>
+      </div>
       <span class="proj-arrow">↗</span>
     </a>
 
-    <a class="proj reveal" href="https://github.com/sravanithota311/clinical-decision-support" target="_blank" rel="noopener">
+    <a class="proj reveal" href="https://github.com/sravanithota311/chicago-taxi-fare-prediction" target="_blank" rel="noopener">
+      <span class="proj-id">PRJ&nbsp;05</span>
+      <div class="proj-body">
+        <span class="task">Distributed ML · Regression</span>
+        <h3>Chicago Taxi Fare Prediction</h3>
+        <p>Fare prediction at scale using PySpark on Databricks — feature engineering and modeling over a large trips dataset.</p>
+        <div class="stack"><span>PySpark</span><span>Databricks</span><span>MLlib</span><span>SQL</span></div>
+      </div>
+      <span class="proj-arrow">↗</span>
+    </a>
+
+    <a class="proj reveal" href="https://github.com/sravanithota311/diabetes-risk-cdss" target="_blank" rel="noopener">
       <span class="proj-id">PRJ&nbsp;06</span>
       <div class="proj-body">
         <span class="task">System Design · Healthcare</span>
         <h3>Clinical Decision Support System</h3>
         <p>A design project for a clinical decision support system — architecture, data flow, and the safety considerations a real deployment would demand.</p>
         <div class="stack"><span>System Design</span><span>ML Architecture</span></div>
+      </div>
+      <span class="proj-arrow">↗</span>
+    </a>
+
+    <a class="proj reveal" href="https://github.com/sravanithota311/skin-scan" target="_blank" rel="noopener">
+      <span class="proj-id">PRJ&nbsp;07</span>
+      <div class="proj-body">
+        <span class="task">Computer Vision · Object Detection</span>
+        <h3>Skin-Scan</h3>
+        <p>A skin-condition detection app built on YOLOv8 — training, inference, and a usable interface end to end.</p>
+        <div class="stack"><span>Python</span><span>YOLOv8</span><span>PyTorch</span><span>OpenCV</span></div>
       </div>
       <span class="proj-arrow">↗</span>
     </a>
@@ -520,10 +581,79 @@
   </div>
 </section>
 
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="idx">04</span>
+      <h2>Certifications</h2>
+    </div>
+    <div class="cert-list">
+      <div class="cert reveal">
+        <div class="cert-main">
+          <h3>Microsoft Certified: Azure Fundamentals (AZ-900)</h3>
+          <span class="cert-issuer">Microsoft</span>
+        </div>
+        <span class="cert-date mono">2022</span>
+      </div>
+      <div class="cert reveal">
+        <div class="cert-main">
+          <h3>GenAI Job Simulation</h3>
+          <span class="cert-issuer">BCG X · via Forage</span>
+        </div>
+        <span class="cert-date mono">2026</span>
+      </div>
+      <div class="cert reveal">
+        <div class="cert-main">
+          <h3>AI in Action Job Simulation</h3>
+          <span class="cert-issuer">Vista · via Forage</span>
+        </div>
+        <span class="cert-date mono">2026</span>
+      </div>
+      <div class="cert reveal">
+        <div class="cert-main">
+          <h3>Artificial Intelligence Fundamentals</h3>
+          <span class="cert-issuer">IBM</span>
+        </div>
+        <span class="cert-date mono">2026</span>
+      </div>
+      <div class="cert reveal">
+        <div class="cert-main">
+          <h3>Introduction to Prompt Engineering for Generative AI</h3>
+          <span class="cert-issuer">LinkedIn</span>
+        </div>
+        <span class="cert-date mono">2026</span>
+      </div>
+      <div class="cert reveal">
+        <div class="cert-main">
+          <h3>Python for Data Science</h3>
+          <span class="cert-issuer">IBM</span>
+        </div>
+        <span class="cert-date mono">2026</span>
+      </div>
+      <div class="cert reveal">
+        <div class="cert-main">
+          <h3>Data Analysis with Python</h3>
+          <span class="cert-issuer">IBM</span>
+        </div>
+        <span class="cert-date mono">2026</span>
+      </div>
+      <div class="cert reveal">
+        <div class="cert-main">
+          <h3>Data Visualization with Python</h3>
+          <span class="cert-issuer">IBM</span>
+        </div>
+        <span class="cert-date mono">2026</span>
+      </div>
+    </div>
+    <p class="cert-foot reveal">Full credential list and verification available on <a href="https://www.linkedin.com/in/sravana-lakshmi-thota/" target="_blank" rel="noopener">LinkedIn</a>.</p>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact" class="contact">
   <div class="wrap">
-    <p class="mono reveal" style="margin-bottom:20px;">04 — Get in touch</p>
+    <p class="mono reveal" style="margin-bottom:20px;">05 — Get in touch</p>
     <h2 class="reveal">Let's build something.</h2>
     <p class="reveal">Open to AI/ML Engineer roles. Happy to talk through any of the work above.</p>
     <div class="contact-links reveal">
